@@ -1,5 +1,6 @@
 import React from 'react';
 import Torrz from './utils/torrz';
+import TorrentList from './components/TorrentList';
 import Torrent from './components/Torrent';
 
 const torrz = new Torrz();
@@ -15,8 +16,10 @@ const App = () => (
     <header>
       <h1 className="logo">Torrz</h1>
     </header>
-    <main className="torrz-list">
-      <Torrent />
+    <main>
+      <TorrentList>
+        <Torrent />
+      </TorrentList>
     </main>
   </div>
 )

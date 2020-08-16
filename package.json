@@ -45,7 +45,11 @@
     "build": "yarn run react-build && yarn run electron-builder",
     "start": "concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron .\"",
     "release": "yarn run react-build && yarn run electron-builder --publish=always",
-    "rebuild": "electron-builder install-app-deps"
+    "rebuild": "electron-builder install-app-deps",
+    "dist:macOS": "node ./scripts/macOS.js",
+    "dist:win32": "node ./scripts/win32.js",
+    "dist:win64": "node ./scripts/win64.js",
+    "dist:linux": "node ./scripts/linux.js"
   },
   "eslintConfig": {
     "extends": "react-app"

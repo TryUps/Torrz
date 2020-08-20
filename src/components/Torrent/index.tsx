@@ -1,17 +1,19 @@
 import React from 'react';
+import { TorrentBox, Label } from './TorrentBox';
 
 interface Props {
   magnet?: string;
   name?: string;
   size?: number;
+  onAdd?: any;
 }
 
-const Torrent: React.FC<Props> = ({ magnet, name, size }) => {
+const Torrent: React.FC<Props> = ({ magnet, name, size, onAdd }) => {
   return (
-    <div className="torrent">
+    <TorrentBox className="torrent" onClick={onAdd}>
       <img src="" alt="" className="torrentImage" />
-      <span>Torrent Title</span>
-    </div>
+      <Label>Torrent Title</Label>
+    </TorrentBox>
   );
 }
 

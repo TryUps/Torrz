@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 
 const TorrentList = styled.section`
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fill, 10rem);
   width: 100vw;
-  height: 100vh;
-  margin: 0 auto;
   padding: 20px;
-  background-color: blue;
+  justify-content: space-evenly;
 `;
 
 export default TorrentList;

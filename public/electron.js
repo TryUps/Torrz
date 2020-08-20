@@ -12,8 +12,14 @@ const createWin = () => {
   win = new BrowserWindow({
     width: 800,
     height: 600,
-    //transparent: true,
-    //frame: true,
+    show: false,
+    transparent: true,
+    frame: true,
+    titleBarStyle: 'hidden',
+    maximizable: false,
+    fullscreenable: false,
+    resizable: false,
+    navigateOnDragDrop: true,
     webPreferences: {
       nodeIntegration: true,
       enableRemoteModule: true,
@@ -26,13 +32,23 @@ const createWin = () => {
     slashes: true
   }));
 
-  win.focus()
+  win.webContents.on('did-finish-load', function () {
+    win.show();
+    win.focus()
+  });
+
+  win.once('ready-to-show', () => {
+    win.show()
+    win.focus()
+  })
 
   if (isDev) {
-    win.openDevTools();
+    win.openDevTools({ mode: 'undocked' })
   }
 
 }
+
+app.disableHardwareAcceleration()
 
 app.whenReady().then(createWin)
 

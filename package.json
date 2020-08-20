@@ -1,9 +1,9 @@
 {
   "name": "torrz",
-  "productName": "Torrz Torrents",
+  "productName": "Torrz",
   "version": "0.1.0",
   "description": "A Modern Torrent Client",
-  "author": "Arilson B. <arilsonbrj@gmail.com>",
+  "author": "TryUps Company. <contact@tryups.ml>",
   "homepage": "./",
   "build": {
     "appId": "ml.tryups.torrz"
@@ -43,7 +43,7 @@
     "react-eject": "react-scripts eject",
     "electron-build": "electron-builder",
     "build": "yarn run react-build && yarn run electron-builder",
-    "start": "concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron .\"",
+    "start": "concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron . --enable-transparent-visuals --disable-gpu\"",
     "release": "yarn run react-build && yarn run electron-builder --publish=always",
     "rebuild": "electron-builder install-app-deps",
     "dist:macOS": "yarn run react-build && node ./scripts/macOS.js",

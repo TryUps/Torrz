@@ -53,6 +53,8 @@ export default class Torrz {
           resolve(torrent)
           break;
       }
+
+      console.log(this.client.torrents);
     })
   }
 

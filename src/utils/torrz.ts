@@ -29,8 +29,9 @@ export default class Torrz {
   async add(magnet: string, options: [] = []) {
     return new Promise((resolve, reject) => {
       let torrent: any = null;
+      let ready: boolean = false;
 
-      torrent = this.client.get(magnet) === null ? undefined : torrent;
+      torrent = this.client.get(magnet) === null ? null : torrent;
 
       const apppath = path.join(app.getPath('downloads'), '/Torrz/')
 
@@ -38,23 +39,29 @@ export default class Torrz {
         path: apppath
       }, this.onTorrent)
 
-      switch (torrent) {
-        case null:
-          reject(new Error('Falied to add torrent with magnet: ' + magnet))
-          break;
-        case this.client.get(magnet):
-          reject(this.alreadyAdded(magnet))
-          break;
-        default:
-          torrent = addTorrent(magnet)
-          torrent.on('error', (e: any) => {
-            return reject(e.message);
-          });
-          resolve(torrent)
-          break;
+      if (torrent === null) {
+        torrent = addTorrent(magnet);
       }
 
-      console.log(this.client.torrents);
+      let infoHash = this.client.get(magnet).infoHash === torrent.infoHash
+
+      if (!infoHash) {
+        reject('Torrent Error, no infoHash encountered!')
+        return false;
+      }
+
+      torrent.on('ready', () => {
+        ready = torrent.ready
+
+        console.log(ready)
+        if (ready === true) {
+          console.log(ready)
+          resolve(torrent)
+        } else {
+          reject('torrent falied')
+        }
+      })
+
     })
   }
 
